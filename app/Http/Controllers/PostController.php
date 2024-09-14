@@ -60,7 +60,7 @@ class PostController extends Controller
     public function deleteData($id){
         $post = Post::find($id);
         $post->delete();
-        return redirect()->route('home')->with('success','Your Post has been Update');
+        return redirect()->route('home')->with('success','Your Post has been delete');
 
 
     }

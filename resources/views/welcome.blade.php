@@ -11,7 +11,7 @@
     <div class="container">
         <div class="flex justify-between my-5">
             <h2 class="text-xl text-red-500">Home</h2>
-            <a href="/create" class="px-4 py-2 text-white bg-green-600 rounded">Add Post</a>
+            <a href="{{ route('create') }}" class="px-4 py-2 text-white bg-green-600 rounded">Add Post</a>
 
         </div>
         @if (session('success'))
@@ -19,7 +19,7 @@
         @endif
 
         <div class="mt-3 row">
-            <div class="col-8">
+            <div class="col-8 overflow-hide">
                 <table class="min-w-full bg-white border border-gray-200">
                     <thead>
                         <tr>
@@ -52,8 +52,16 @@
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <a class="px-4 py-2 mr-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700"
                                         href="{{ route('edit', $post->id) }}">Edit</a>
-                                    <a class="px-4 py-2 mr-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700"
-                                        href="{{ route('delete', $post->id) }}">Delete</a>
+                                    {{-- <a class="px-4 py-2 mr-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700"
+                                        href="{{ route('delete', $post->id) }}">Delete</a> --}}
+
+                                    <form method="post" action="{{ route('delete', $post->id) }}" class="inline">
+                                        @csrf
+                                        @method('delete')
+                                        <button type="submit"
+                                            class="px-4 py-2 mr-2 font-bold text-white bg-red-500 rounded hover:bg-blue-700">Delete</button>
+
+                                    </form>
 
                                 </td>
                             </tr>
@@ -61,6 +69,7 @@
                         <!-- Add more rows here -->
                     </tbody>
                 </table>
+                {{ $posts->links() }}
             </div>
         </div>
     </div>
